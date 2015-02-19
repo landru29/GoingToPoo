@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/pref_general">
+
+        <CheckBoxPreference
+            android:key="keep_in_notification_bar"
+            android:title="@string/pref_keep_in_notification_bar"
+            android:summary="@string/pref_keep_in_notification_bar_summary"
+            android:defaultValue="true"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_salary">
+
+        <EditTextPreference
+            android:key="salary"
+            android:title="@string/pref_gross_salary"
+            android:summary="@string/pref_gross_salary_summary"
+            android:dialogTitle="@string/pref_gross_salary_summary"
+            android:numeric="integer"
+            />
+
+        <EditTextPreference
+            android:key="bonus"
+            android:title="@string/pref_bonus"
+            android:summary="@string/pref_bonus_summary"
+            android:dialogTitle="@string/pref_bonus_summary"
+            android:numeric="integer"
+            />
+
+        <EditTextPreference
+            android:key="taxes"
+            android:title="@string/pref_boss_taxes"
+            android:summary="@string/pref_boss_taxes_summary"
+            android:dialogTitle="@string/pref_boss_taxes_summary"
+            android:numeric="integer"
+            />
+
+        <EditTextPreference
+            android:key="hours"
+            android:title="@string/pref_hours"
+            android:summary="@string/pref_hours_summary"
+            android:dialogTitle="@string/pref_hours_summary"
+            android:defaultValue="@string/pref_hours_default"
+            android:numeric="integer"
+            />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

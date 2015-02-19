@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "Poo": {
+            "applicationId": "xxx", 
+            "masterKey": "xxx"
+        }, 
+        "_default": {
+            "link": "Poo"
+        }
+    }
+}

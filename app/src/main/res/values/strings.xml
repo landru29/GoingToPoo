@@ -2,7 +2,32 @@
 <resources>
 
     <string name="app_name">Going To Poo</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="launch_chrono">Starting poo</string>
+    <string name="stop_chrono">Ending poo</string>
+    <string name="reset">Reset</string>
+    <string name="boss_taxes">Boss taxes</string>
+    <string name="time">Time</string>
+    <string name="working_hours">Working hours per years</string>
+    <string name="cost">My poo costs</string>
     <string name="action_settings">Settings</string>
+    <string name="settings">Préférences</string>
+
+
+    <string name="pref_salary">Salaire et primes</string>
+    <string name="pref_settings">Préférences</string>
+    <string name="pref_general">Général</string>
+    <string name="pref_data">Données d\'entrée</string>
+    <string name="pref_data_summary">Données de calcul</string>
+    <string name="pref_keep_in_notification_bar">Garder actif dans la barre de notification</string>
+    <string name="pref_keep_in_notification_bar_summary">Afficher une icone dans la barre de notification</string>
+    <string name="pref_gross_salary">Salaire brut</string>
+    <string name="pref_gross_salary_summary">Salaire brut mensuel</string>
+    <string name="pref_bonus">Primes</string>
+    <string name="pref_bonus_summary">Primes mensuelles</string>
+    <string name="pref_boss_taxes">Charges patronales</string>
+    <string name="pref_boss_taxes_summary">Ce que votre patron paie en plus de votre salaire</string>
+    <string name="pref_hours">Heures travaillées dans l\'année</string>
+    <string name="pref_hours_summary">Nombre d\'heures travaillées en un an</string>
+    <string name="pref_hours_default">1600</string>
 
 </resources>
