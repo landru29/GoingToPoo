@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.landru.goingtopoo.R;
 
+import java.util.HashMap;
+
 /**
  * Created by cyrille on 19/02/15.
  */
@@ -67,4 +69,22 @@ public class Prefs {
         return Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
     }
+
+    public void synchronizeData() {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        final SharedPreferences.Editor ed = settings.edit();
+        if ((getGrossSalary()>0) && (settings.getBoolean("salary_synch", false) == false)) {
+            HashMap request = new HashMap();
+            request.put("deviceId", getDeviceId());
+            request.put("salary", getGrossSalary());
+            DataSynchro.synchronize(new DataSynchro(request) {
+                @Override
+                protected void done() {
+                    Log.i("Data", "Synchronized");
+                    ed.putBoolean("salary_synch", true).commit();
+                }
+            });
+        }
+    }
+
 }

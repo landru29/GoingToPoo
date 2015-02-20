@@ -7,7 +7,10 @@ import android.preference.PreferenceFragment;
 import android.util.Log;
 
 import com.landru.goingtopoo.R;
+import com.landru.goingtopoo.lib.DataSynchro;
 import com.landru.goingtopoo.lib.Prefs;
+
+import java.util.HashMap;
 
 public class PrefsFragment extends PreferenceFragment implements
         SharedPreferences.OnSharedPreferenceChangeListener {
@@ -36,7 +39,7 @@ public class PrefsFragment extends PreferenceFragment implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        SharedPreferences.Editor ed = sharedPreferences.edit();
+        final SharedPreferences.Editor ed = sharedPreferences.edit();
         switch (key) {
             case "salary":
                 double taxes = Math.round(Prefs.getInstance().getGrossSalary() * Prefs.getInstance().getTaxesRate());
@@ -44,6 +47,9 @@ public class PrefsFragment extends PreferenceFragment implements
                 EditTextPreference text = (EditTextPreference)findPreference("taxes");
                 text.setText("" + taxes);
                 Log.i("PREF", "New Taxe " + taxes);
+                // Synchronization
+                ed.putBoolean("salary_synch", false).commit();
+                Prefs.getInstance().synchronizeData();
                 break;
             case "taxes":
                 double taxesRate =  Prefs.getInstance().getTaxes() / Prefs.getInstance().getGrossSalary();

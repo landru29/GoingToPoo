@@ -12,6 +12,7 @@ import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.landru.goingtopoo.lib.Chrono;
 import com.landru.goingtopoo.lib.Prefs;
 
 import java.text.DecimalFormat;
@@ -21,6 +22,8 @@ public class ChronoActivity extends ActionBarActivity {
 
     private boolean chronoState;
 
+    private Chrono chrono;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         chronoState = false;
@@ -28,7 +31,7 @@ public class ChronoActivity extends ActionBarActivity {
         setContentView(R.layout.activity_chrono);
 
         final Button button = (Button) findViewById(R.id.start_stop);
-        final Chronometer chrono = (Chronometer) findViewById(R.id.chronometer);
+        final Chrono chrono = new Chrono((Chronometer) findViewById(R.id.chronometer));
         final TextView totalCost = (TextView) findViewById(R.id.costing);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +39,7 @@ public class ChronoActivity extends ActionBarActivity {
                 chronoState = !chronoState;
                 ChronoActivity.changeButtonCaption(button, chronoState);
                 if (chronoState== true) {
-                    chrono.setBase(SystemClock.elapsedRealtime());
+                    chrono.reset();
                     chrono.start();
                 } else {
                     chrono.stop();
