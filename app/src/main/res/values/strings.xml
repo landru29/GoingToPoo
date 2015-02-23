@@ -2,14 +2,12 @@
 <resources>
 
     <string name="app_name">Going To Poo</string>
-    <string name="launch_chrono">Starting poo</string>
-    <string name="stop_chrono">Ending poo</string>
+    <string name="launch_chrono">Je fais caca</string>
+    <string name="stop_chrono">J\'ai fini</string>
     <string name="reset">Reset</string>
-    <string name="boss_taxes">Boss taxes</string>
-    <string name="time">Time</string>
-    <string name="working_hours">Working hours per years</string>
-    <string name="cost">My poo costs</string>
-    <string name="action_settings">Settings</string>
+    <string name="time">Durée</string>
+    <string name="cost">Mon caca coûte</string>
+    <string name="action_settings">Préférences</string>
     <string name="settings">Préférences</string>
 
 
