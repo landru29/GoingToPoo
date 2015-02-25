@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +23,6 @@ public class ChronoActivity extends ActionBarActivity {
 
     private boolean chronoState;
 
-    private Chrono chrono;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         chronoState = false;
@@ -31,7 +30,7 @@ public class ChronoActivity extends ActionBarActivity {
         setContentView(R.layout.activity_chrono);
 
         final Button button = (Button) findViewById(R.id.start_stop);
-        final Chrono chrono = new Chrono((Chronometer) findViewById(R.id.chronometer));
+        final Chrono chrono = new Chrono(this);
         final TextView totalCost = (TextView) findViewById(R.id.costing);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -47,12 +46,11 @@ public class ChronoActivity extends ActionBarActivity {
             }
         });
 
-        chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+        chrono.setOnTick(new Runnable() {
             @Override
-            public void onChronometerTick(Chronometer chronometer) {
+            public void run() {
                 double perMilli = Prefs.getInstance().getHourCost() / 3600000;
-                long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
-                double cost=elapsedMillis * perMilli;
+                double cost=chrono.getMilliseconds() * perMilli;
                 DecimalFormat myFormatter = new DecimalFormat("#0.00");
                 totalCost.setText(myFormatter.format(cost));
             }
