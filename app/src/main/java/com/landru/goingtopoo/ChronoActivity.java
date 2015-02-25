@@ -1,16 +1,14 @@
 package com.landru.goingtopoo;
 
 import android.content.Intent;
-import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.landru.goingtopoo.lib.Chrono;
@@ -21,28 +19,34 @@ import java.text.DecimalFormat;
 
 public class ChronoActivity extends ActionBarActivity {
 
-    private boolean chronoState;
+    private Chrono chrono;
+
+    private Animation animAlphaOff;
+    private Animation animAlphaOn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        chronoState = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chrono);
 
         final Button button = (Button) findViewById(R.id.start_stop);
-        final Chrono chrono = new Chrono(this);
+        chrono = new Chrono(this);
         final TextView totalCost = (TextView) findViewById(R.id.costing);
+
+        animAlphaOff = AnimationUtils.loadAnimation(this, R.anim.alpha_off);
+        animAlphaOn = AnimationUtils.loadAnimation(this, R.anim.alpha_on);
+
+
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                chronoState = !chronoState;
-                ChronoActivity.changeButtonCaption(button, chronoState);
-                if (chronoState== true) {
+                if (chrono.isStarted() == false) {
                     chrono.reset();
                     chrono.start();
                 } else {
                     chrono.stop();
                 }
+                switchButton((Button) v);
             }
         });
 
@@ -58,12 +62,30 @@ public class ChronoActivity extends ActionBarActivity {
 
     }
 
-    private static void changeButtonCaption(Button button, boolean state) {
-        if (state == true) {
-            button.setText(R.string.stop_chrono);
-        } else {
-            button.setText(R.string.launch_chrono);
-        }
+    private void switchButton(final Button button) {
+        final boolean chronoState = chrono.isStarted();
+        animAlphaOff.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (chronoState) {
+                    button.setText(R.string.stop_chrono);
+                } else {
+                    button.setText(R.string.launch_chrono);
+                }
+                button.startAnimation(animAlphaOn);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        button.startAnimation(animAlphaOff);
     }
 
 
@@ -76,13 +98,7 @@ public class ChronoActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.action_settings:
                 startActivity(new Intent(this, PrefsActivity.class));
                 return true;

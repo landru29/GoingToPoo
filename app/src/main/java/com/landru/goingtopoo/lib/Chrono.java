@@ -33,12 +33,18 @@ public class Chrono {
         this.currentActivity = activity;
     }
 
+    /**
+     * Reset the chronometer
+     */
     public void reset() {
         this.startTime = System.currentTimeMillis();
         this.currentTime = this.startTime;
         this.stopTime = -1;
     }
 
+    /**
+     * Stop the chronometer
+     */
     public void stop() {
         this.stopTime = System.currentTimeMillis();
         if (this.timer != null) {
@@ -48,6 +54,9 @@ public class Chrono {
         save();
     }
 
+    /**
+     * Start the Chronometer
+     */
     public void start() {
         this.currentTime = this.startTime;
         this.stopTime = -1;
@@ -67,6 +76,14 @@ public class Chrono {
     }
 
     /**
+     * Get the state of the chronometer
+     * @return true if running
+     */
+    public boolean isStarted() {
+        return started;
+    }
+
+    /**
      * Get the number of seconds
      * @return number of seconds
      */
@@ -74,14 +91,25 @@ public class Chrono {
         return (int)Math.round((this.currentTime - this.startTime) / 1000);
     }
 
+    /**
+     * Get elapsed milliseconds
+     * @return elapsed time in milliseconds
+     */
     public long getMilliseconds() {
         return this.currentTime - this.startTime;
     }
 
+    /**
+     * Set task to run every 100 milliseconds
+     * @param task task to run
+     */
     public void setOnTick(Runnable task) {
         this.task = task;
     }
 
+    /**
+     * Save the Chronometer and the cost in database
+     */
     private void save() {
         double secondCost = Prefs.getInstance().getHourCost() / 3600;
         float cost = (float)(secondCost * getLasting());
@@ -91,6 +119,11 @@ public class Chrono {
         }
     }
 
+    /**
+     * Convert milliseconds in Date
+     * @param milli milliseconds to convert
+     * @return Date object
+     */
     private static Date fromMilliseconds(long milli) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milli);
