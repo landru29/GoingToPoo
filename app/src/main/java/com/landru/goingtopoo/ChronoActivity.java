@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.landru.goingtopoo.lib.Chrono;
@@ -29,7 +30,7 @@ public class ChronoActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chrono);
 
-        final Button button = (Button) findViewById(R.id.start_stop);
+        final ImageButton button = (ImageButton) findViewById(R.id.start_stop);
         chrono = new Chrono(this);
         final TextView totalCost = (TextView) findViewById(R.id.costing);
 
@@ -46,7 +47,7 @@ public class ChronoActivity extends ActionBarActivity {
                 } else {
                     chrono.stop();
                 }
-                switchButton((Button) v);
+                switchButton((ImageButton) v);
             }
         });
 
@@ -62,7 +63,7 @@ public class ChronoActivity extends ActionBarActivity {
 
     }
 
-    private void switchButton(final Button button) {
+    private void switchButton(final ImageButton button) {
         final boolean chronoState = chrono.isStarted();
         animAlphaOff.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -73,9 +74,9 @@ public class ChronoActivity extends ActionBarActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 if (chronoState) {
-                    button.setText(R.string.stop_chrono);
+                    button.setImageResource(R.drawable.pq);
                 } else {
-                    button.setText(R.string.launch_chrono);
+                    button.setImageResource(R.drawable.merde);
                 }
                 button.startAnimation(animAlphaOn);
             }

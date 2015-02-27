@@ -2,13 +2,11 @@
 <resources>
 
     <string name="app_name">Going To Poo</string>
-    <string name="launch_chrono">Je fais caca</string>
-    <string name="stop_chrono">J\'ai fini</string>
     <string name="reset">Reset</string>
     <string name="time">Durée</string>
-    <string name="cost">Mon caca coûte</string>
     <string name="action_settings">Préférences</string>
     <string name="settings">Préférences</string>
+    <string name="button_description">start/stop</string>
 
 
     <string name="pref_salary">Salaire et primes</string>
