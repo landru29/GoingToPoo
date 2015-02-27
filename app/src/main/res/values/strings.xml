@@ -9,11 +9,14 @@
     <string name="button_description">start/stop</string>
 
 
+    <string name="pref_data">Données d\'entrée</string>
+    <string name="pref_data_summary">Données de calcul</string>
+    <string name="pref_behaviour">Comportement de l\'application</string>
+    <string name="pref_behaviour_summary"></string>
+
     <string name="pref_salary">Salaire et primes</string>
     <string name="pref_settings">Préférences</string>
     <string name="pref_general">Général</string>
-    <string name="pref_data">Données d\'entrée</string>
-    <string name="pref_data_summary">Données de calcul</string>
     <string name="pref_keep_in_notification_bar">Garder actif dans la barre de notification</string>
     <string name="pref_keep_in_notification_bar_summary">Afficher une icone dans la barre de notification</string>
     <string name="pref_gross_salary">Salaire brut</string>

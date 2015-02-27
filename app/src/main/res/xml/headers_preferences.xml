@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <header android:fragment="com.landru.goingtopoo.PrefsFragment"
+    <header android:fragment="com.landru.goingtopoo.BehaviourPrefsFragment"
+        android:title="@string/pref_behaviour"
+        android:summary="@string/pref_behaviour_summary" />
+
+    <header android:fragment="com.landru.goingtopoo.DataPrefsFragment"
         android:title="@string/pref_data"
         android:summary="@string/pref_data_summary" />
 

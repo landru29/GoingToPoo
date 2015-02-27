@@ -1,9 +1,6 @@
 package com.landru.goingtopoo;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.preference.PreferenceActivity;
-
 import java.util.List;
 
 /**
@@ -20,6 +17,6 @@ public class PrefsActivity extends PreferenceActivity
     @Override
     protected boolean isValidFragment(String fragmentName)
     {
-        return PrefsFragment.class.getName().equals(fragmentName);
+        return (DataPrefsFragment.class.getName().equals(fragmentName)) || (BehaviourPrefsFragment.class.getName().equals(fragmentName));
     }
 }

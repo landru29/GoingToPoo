@@ -8,7 +8,6 @@ import com.landru.goingtopoo.database.PooRow;
 import com.landru.goingtopoo.database.PooTable;
 import com.landru.goingtopoo.lib.Prefs;
 import com.parse.Parse;
-
 import java.util.ArrayList;
 
 /**

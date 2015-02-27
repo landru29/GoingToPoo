@@ -5,17 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
-import com.landru.goingtopoo.lib.Chrono;
-import com.landru.goingtopoo.lib.Prefs;
-
-import java.text.DecimalFormat;
 
 
 public class ChronoActivity extends ActionBarActivity {
