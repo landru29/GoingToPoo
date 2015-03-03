@@ -3,10 +3,14 @@ package com.landru.goingtopoo.lib;
 import android.app.Activity;
 import android.content.Context;
 import android.os.SystemClock;
+import android.util.Log;
 import android.widget.Chronometer;
 
 import com.landru.goingtopoo.database.Database;
 import com.landru.goingtopoo.database.PooRow;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,7 +22,6 @@ import java.util.TimerTask;
  */
 public class Chrono {
     private long startTime;
-    private long currentTime;
     private long stopTime;
     private Timer timer;
     private Runnable task;
@@ -28,9 +31,25 @@ public class Chrono {
     public Chrono(Activity activity) {
         this.startTime = -1;
         this.stopTime = -1;
-        this.currentTime = -1;
         this.started = false;
         this.currentActivity = activity;
+    }
+
+    public Chrono(Activity activity, JSONObject data) {
+        this.currentActivity = activity;
+        try {
+            if (data.has("startTime")) {
+                this.startTime = Long.valueOf(data.getString("startTime"));
+            }
+            if (data.has("stopTime")) {
+                this.stopTime = Long.valueOf(data.getString("stopTime"));
+            }
+            if (data.has("started")) {
+                this.started = (data.getString("started").compareTo("true") == 0 ? true : false);
+            }
+        } catch (JSONException err) {
+            Log.w("Chrono", err.getMessage());
+        }
     }
 
     /**
@@ -38,7 +57,6 @@ public class Chrono {
      */
     public void reset() {
         this.startTime = System.currentTimeMillis();
-        this.currentTime = this.startTime;
         this.stopTime = -1;
     }
 
@@ -57,15 +75,13 @@ public class Chrono {
     /**
      * Start the Chronometer
      */
-    public void start() {
-        this.currentTime = this.startTime;
+    public void start(boolean force) {
         this.stopTime = -1;
-        if (this.started == false) {
+        if ((this.started == false) || force) {
             this.timer = new Timer();
             this.timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    currentTime += 100;
                     if (task != null) {
                         currentActivity.runOnUiThread(task);
                     }
@@ -73,6 +89,10 @@ public class Chrono {
             }, 0, 100);
         }
         this.started = true;
+    }
+
+    public void start() {
+        start(false);
     }
 
     /**
@@ -88,7 +108,7 @@ public class Chrono {
      * @return number of seconds
      */
     public int getLasting() {
-        return (int)Math.round((this.currentTime - this.startTime) / 1000);
+        return (int)Math.round((getCurrent() - this.startTime) / 1000);
     }
 
     /**
@@ -96,8 +116,41 @@ public class Chrono {
      * @return elapsed time in milliseconds
      */
     public long getMilliseconds() {
-        return this.currentTime - this.startTime;
+        return getCurrent() - this.startTime;
     }
+
+    /**
+     * Get the current value
+     * @return
+     */
+    public long getCurrent() {
+        return (this.stopTime>0 ? this.stopTime : System.currentTimeMillis());
+    }
+
+    /**
+     * Transform the question in a string representation (json)
+     * @return string of the JSON representation
+     */
+    public String stringify() {
+        return this.toJson().toString();
+    }
+
+    /**
+     * Convert Question into JSON
+     * @return JSON representation of the choice
+     */
+    public JSONObject toJson() {
+        JSONObject result = new JSONObject();
+        try {
+            result.accumulate("startTime", this.startTime);
+            result.accumulate("stopTime", this.stopTime);
+            result.accumulate("started", (this.started ? "true" : "false"));
+        } catch (JSONException err) {
+            Log.w("Chrono", err.getMessage());
+        }
+        return result;
+    }
+
 
     /**
      * Set task to run every 100 milliseconds

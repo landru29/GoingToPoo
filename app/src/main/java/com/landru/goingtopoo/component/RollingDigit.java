@@ -1,11 +1,15 @@
-package com.landru.goingtopoo.lib;
+package com.landru.goingtopoo.component;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 import com.landru.goingtopoo.R;
+
+
 import java.util.ArrayList;
 
 /**
@@ -16,34 +20,57 @@ public class RollingDigit extends ImageView {
     public static ArrayList<Integer> wheels;
     public static ArrayList<Integer> animatedWheels;
     private double scale;
-
     private ArrayList<Integer> animationList;
     private int value;
 
-    public RollingDigit(Context context, double scale) {
-        super(context);
+    /**
+     * Constructor
+     * @param context
+     * @param attrs
+     * @param defStyle
+     */
+    public RollingDigit(Context context, AttributeSet attrs, int defStyle)  {
+        super(context, attrs, defStyle);
         generateWheel();
         animationList = new ArrayList<Integer>();
         this.setBackgroundResource(wheels.get(0));
-        this.scale = scale;
+
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RollingDigit, 0, 0);
+        this.scale = a.getFloat(R.styleable.RollingDigit_scale, 1);
+        a.recycle();
     }
 
+    /**
+     * Constructor
+     * @param context
+     */
     public RollingDigit(Context context) {
-        this(context, 1);
+        this(context, null);
     }
 
+    /**
+     * Constructor
+     * @param context
+     * @param attrs
+     */
+    public RollingDigit(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    /**
+     * Set the value on one digit
+     * @param value
+     */
     public void setValue(int value) {
         if (value != this.value) {
-            //this.setImageResource(wheels.get(value));
             chainAnimation(this.value, value);
         }
         this.value = value;
     }
 
-    public int getValue() {
-        return this.value;
-    }
-
+    /**
+     * Generate input data
+     */
     private void generateWheel() {
         if (null == wheels) {
             wheels = new ArrayList<Integer>();
@@ -74,6 +101,11 @@ public class RollingDigit extends ImageView {
         }
     }
 
+    /**
+     * Chain and launch animations
+     * @param from number from (one digit) - inclusive
+     * @param to   number to (one digit) - inclusive
+     */
     public void chainAnimation(int from, int to) {
         int thisFrom = from;
         if (animationList.size() != 0) {
@@ -91,16 +123,22 @@ public class RollingDigit extends ImageView {
                 animationList.add(i);
             }
         }
-        this.setBackgroundResource(animatedWheels.get(animationList.remove(0)));
-        RollingAnimation animation = new RollingAnimation(this, (AnimationDrawable)this.getBackground());
-        animation.launch((Activity) this.getContext(), animationList);
+        if (animationList.size()>0) {
+            this.setBackgroundResource(animatedWheels.get(animationList.remove(0)));
+            RollingAnimation animation = new RollingAnimation(this, (AnimationDrawable) this.getBackground());
+            animation.launch((Activity) this.getContext(), animationList);
+        }
     }
 
+    /**
+     * Redim element
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int height = (int)Math.round((double)getContext().getResources().getDrawable(R.drawable.wheel_0_0).getIntrinsicHeight() * scale);
         int width = (int)Math.round((double)getContext().getResources().getDrawable(R.drawable.wheel_0_0).getIntrinsicWidth() * scale);
-        Log.i("Height !", "" + height);
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST);
         widthMeasureSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST);
         getLayoutParams().height = height;

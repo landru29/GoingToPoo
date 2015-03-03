@@ -1,8 +1,11 @@
 package com.landru.goingtopoo;
 
+
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,16 +17,15 @@ public class ChronoActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chrono);
 
-        loadChrono();
-
+        if (savedInstanceState == null) {
+            loadChrono();
+        }
 
     }
 
     public void loadChrono() {
         ChronoFragment myFragment = new ChronoFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, myFragment)
-                .commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, myFragment).commit();
     }
 
 

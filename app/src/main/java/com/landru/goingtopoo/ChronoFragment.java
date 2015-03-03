@@ -3,20 +3,21 @@ package com.landru.goingtopoo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-import com.google.android.gms.plus.PlusOneButton;
 import com.landru.goingtopoo.lib.Chrono;
 import com.landru.goingtopoo.lib.Prefs;
-import com.landru.goingtopoo.lib.RollingDisplay;
+import com.landru.goingtopoo.component.RollingView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 
@@ -45,6 +46,7 @@ public class ChronoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chrono, container, false);
 
@@ -57,19 +59,53 @@ public class ChronoFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         final ImageButton button = (ImageButton) getActivity().findViewById(R.id.start_stop);
-        chrono = new Chrono(getActivity());
-        //final TextView totalCost = (TextView) getActivity().findViewById(R.id.costing);
+
+        if ((savedInstanceState != null) && (savedInstanceState.containsKey("SavedChrono"))) {
+            Log.i("Restaure", savedInstanceState.getString("SavedChrono"));
+            try {
+                JSONObject json = new JSONObject(savedInstanceState.getString("SavedChrono"));
+                if (json != null) {
+                    chrono = new Chrono(getActivity(), json);
+                } else {
+                    chrono = new Chrono(getActivity());
+                }
+            } catch (JSONException err) {
+                Log.w("Restaure Chrono", err.getMessage());
+            }
+        } else {
+            chrono = new Chrono(getActivity());
+        }
+
+        if (chrono.isStarted()) {
+            ((ImageButton)getView().findViewById(R.id.start_stop)).setImageResource(R.drawable.pq);
+        }
+
+        final View v = getView();
+
+        chrono.setOnTick(new Runnable() {
+            @Override
+            public void run() {
+                double perMilli = Prefs.getInstance().getHourCost() / 3600000;
+                double cost=chrono.getMilliseconds() * perMilli;
+                if (v != null) {
+                    RollingView totalCost = (RollingView) v.findViewById(R.id.rollingView);
+                    totalCost.setValue(cost);
+                }
+            }
+        });
+
+        if (chrono.isStarted()) {
+            chrono.start(true);
+        }
 
         animAlphaOff = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha_off);
         animAlphaOn = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha_on);
 
-        final RollingDisplay totalCost = new RollingDisplay(getActivity());
-        ((LinearLayout) getView().findViewById(R.id.counterLayout)).addView(totalCost);
-
-
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (chrono.isStarted() == false) {
+                    RollingView totalCost = (RollingView)getView().findViewById(R.id.rollingView);
+                    totalCost.setValue(0);
                     chrono.reset();
                     chrono.start();
                 } else {
@@ -79,16 +115,6 @@ public class ChronoFragment extends Fragment {
             }
         });
 
-        chrono.setOnTick(new Runnable() {
-            @Override
-            public void run() {
-                double perMilli = Prefs.getInstance().getHourCost() / 3600000;
-                double cost=chrono.getMilliseconds() * perMilli;
-                //DecimalFormat myFormatter = new DecimalFormat("#0.00");
-                //totalCost.setText(myFormatter.format(cost));
-                totalCost.setValue(cost);
-            }
-        });
     }
 
     private void switchButton(final ImageButton button) {
@@ -117,6 +143,12 @@ public class ChronoFragment extends Fragment {
         button.startAnimation(animAlphaOff);
     }
 
+    @Override
+    public void onSaveInstanceState( Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("SavedChrono", chrono.stringify());
+        this.chrono.stop();
+    }
 
     @Override
     public void onResume() {

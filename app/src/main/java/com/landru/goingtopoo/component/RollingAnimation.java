@@ -1,4 +1,4 @@
-package com.landru.goingtopoo.lib;
+package com.landru.goingtopoo.component;
 
 import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
@@ -16,6 +16,11 @@ public class RollingAnimation {
     private AnimationDrawable source;
     private ImageView image;
 
+    /**
+     * Constructor
+     * @param img    image container
+     * @param source animation retrived from the img
+     */
     public RollingAnimation(ImageView img, AnimationDrawable source) {
         super();
         this.source = source;
@@ -23,6 +28,11 @@ public class RollingAnimation {
     }
 
 
+    /**
+     * Launch a list of animations; recursive method
+     * @param currentActivity activity in which the animation is playing
+     * @param numbers         numbers to animate
+     */
     public void launch(final Activity currentActivity, final ArrayList<Integer> numbers) {
         long duration = 0;
         final Runnable task = new Runnable() {
