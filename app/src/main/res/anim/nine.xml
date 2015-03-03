@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="true">
-    <item android:drawable="@drawable/9-88" android:duration="20" />
-    <item android:drawable="@drawable/9-85" android:duration="20" />
-    <item android:drawable="@drawable/9-80" android:duration="20" />
-    <item android:drawable="@drawable/9-70" android:duration="20" />
-    <item android:drawable="@drawable/9-60" android:duration="20" />
-    <item android:drawable="@drawable/9-50" android:duration="20" />
-    <item android:drawable="@drawable/9-40" android:duration="20" />
-    <item android:drawable="@drawable/9-30" android:duration="20" />
-    <item android:drawable="@drawable/9-20" android:duration="20" />
-    <item android:drawable="@drawable/9-10" android:duration="20" />
-    <item android:drawable="@drawable/9-5" android:duration="20" />
-    <item android:drawable="@drawable/9-2" android:duration="20" />
-    <item android:drawable="@drawable/9-0" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_80" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_70" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_60" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_50" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_40" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_30" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_20" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_10" android:duration="20" />
+    <item android:drawable="@drawable/wheel_9_0" android:duration="20" />
 </animation-list>

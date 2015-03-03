@@ -43,7 +43,7 @@
           <stop
              id="middle"
              offset="0.5"
-             style="stop-color:#f1ff1f;stop-opacity:0.5;" />
+             style="stop-color:#faffac;stop-opacity:1;" />
           <stop
              style="stop-color:#f1ff1f;stop-opacity:1;"
              offset="1"

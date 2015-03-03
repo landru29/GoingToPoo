@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import com.google.android.gms.plus.PlusOneButton;
 import com.landru.goingtopoo.lib.Chrono;
 import com.landru.goingtopoo.lib.Prefs;
+import com.landru.goingtopoo.lib.RollingDisplay;
 
 import java.text.DecimalFormat;
 
@@ -56,10 +58,14 @@ public class ChronoFragment extends Fragment {
 
         final ImageButton button = (ImageButton) getActivity().findViewById(R.id.start_stop);
         chrono = new Chrono(getActivity());
-        final TextView totalCost = (TextView) getActivity().findViewById(R.id.costing);
+        //final TextView totalCost = (TextView) getActivity().findViewById(R.id.costing);
 
         animAlphaOff = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha_off);
         animAlphaOn = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha_on);
+
+        final RollingDisplay totalCost = new RollingDisplay(getActivity());
+        ((LinearLayout) getView().findViewById(R.id.counterLayout)).addView(totalCost);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -78,11 +84,11 @@ public class ChronoFragment extends Fragment {
             public void run() {
                 double perMilli = Prefs.getInstance().getHourCost() / 3600000;
                 double cost=chrono.getMilliseconds() * perMilli;
-                DecimalFormat myFormatter = new DecimalFormat("#0.00");
-                totalCost.setText(myFormatter.format(cost));
+                //DecimalFormat myFormatter = new DecimalFormat("#0.00");
+                //totalCost.setText(myFormatter.format(cost));
+                totalCost.setValue(cost);
             }
         });
-
     }
 
     private void switchButton(final ImageButton button) {

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="true">
-    <item android:drawable="@drawable/4-88" android:duration="20" />
-    <item android:drawable="@drawable/4-85" android:duration="20" />
-    <item android:drawable="@drawable/4-80" android:duration="20" />
-    <item android:drawable="@drawable/4-70" android:duration="20" />
-    <item android:drawable="@drawable/4-60" android:duration="20" />
-    <item android:drawable="@drawable/4-50" android:duration="20" />
-    <item android:drawable="@drawable/4-40" android:duration="20" />
-    <item android:drawable="@drawable/4-30" android:duration="20" />
-    <item android:drawable="@drawable/4-20" android:duration="20" />
-    <item android:drawable="@drawable/4-10" android:duration="20" />
-    <item android:drawable="@drawable/4-5" android:duration="20" />
-    <item android:drawable="@drawable/4-2" android:duration="20" />
-    <item android:drawable="@drawable/4-0" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_80" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_70" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_60" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_50" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_40" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_30" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_20" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_10" android:duration="20" />
+    <item android:drawable="@drawable/wheel_4_0" android:duration="20" />
 </animation-list>

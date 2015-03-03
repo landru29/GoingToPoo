@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ORIGINAL_VALUE=48
+ORIGINAL_VALUE=24
 FLAG="-w"
 
 function export {
@@ -12,10 +12,10 @@ function export {
 
 for NUMBER in 0 1 2 3 4 5 6 7 8 9
 do
-    for ANGLE in 88 85 80 70 60 50 40 30 20 10 5 2 0
+    for ANGLE in 80 70 60 50 40 30 20 10 0
     do
         COMMAND="./roue.php $NUMBER $ANGLE"
-        FILENAME=${NUMBER}-${ANGLE}.png
+        FILENAME="wheel_${NUMBER}_${ANGLE}.png"
         $COMMAND > temp.svg
         export 1 drawable-mdpi $FILENAME
         export 1.5 drawable-hdpi $FILENAME

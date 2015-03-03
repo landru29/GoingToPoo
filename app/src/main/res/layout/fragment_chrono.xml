@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_border"
+        android:id="@+id/counterLayout"
         android:layout_gravity="center_vertical">
 
         <ImageView
@@ -28,16 +29,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
             android:src="@drawable/euro"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/costing"
-            android:singleLine="true"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="@dimen/abc_text_size_caption_material"
-            android:textSize="@dimen/abc_action_bar_progress_bar_size" />
+            android:paddingRight="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:layout_gravity="bottom" />
 
     </LinearLayout>
 
