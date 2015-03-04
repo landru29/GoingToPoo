@@ -6,13 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".PooApplication"
+        android:name="fr.noopy.goingtopoo.PooApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ChronoActivity"
+            android:name="fr.noopy.goingtopoo.ChronoActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PrefsActivity"
+            android:name="fr.noopy.goingtopoo.PrefsActivity"
             android:label="@string/settings" >
         </activity>
     </application>

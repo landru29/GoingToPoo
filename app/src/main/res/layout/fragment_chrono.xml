@@ -1,11 +1,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/activity_vertical_margin"
-    android:contentDescription="@string/button_description">
+    >
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -33,7 +32,7 @@
             android:paddingRight="@dimen/abc_action_bar_icon_vertical_padding_material"
             android:layout_gravity="bottom" />
 
-        <com.landru.goingtopoo.component.RollingView
+        <fr.noopy.goingtopoo.component.RollingView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rollingView"

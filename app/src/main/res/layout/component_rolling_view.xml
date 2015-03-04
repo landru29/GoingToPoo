@@ -5,31 +5,31 @@
     android:orientation="horizontal" android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.landru.goingtopoo.component.RollingDigit
+    <fr.noopy.goingtopoo.component.RollingDigit
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:scale="1"
         android:id="@+id/digitThree"
         android:layout_gravity="bottom" />
-    <com.landru.goingtopoo.component.RollingDigit
+    <fr.noopy.goingtopoo.component.RollingDigit
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:scale="1"
         android:id="@+id/digitTwo"
         android:layout_gravity="bottom" />
-    <com.landru.goingtopoo.component.RollingDigit
+    <fr.noopy.goingtopoo.component.RollingDigit
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:scale="1"
         android:id="@+id/digitOne"
         android:layout_gravity="bottom" />
-    <com.landru.goingtopoo.component.RollingDigit
+    <fr.noopy.goingtopoo.component.RollingDigit
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:scale="0.7"
         android:id="@+id/decimalOne"
         android:layout_gravity="bottom" />
-    <com.landru.goingtopoo.component.RollingDigit
+    <fr.noopy.goingtopoo.component.RollingDigit
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         custom:scale="0.7"

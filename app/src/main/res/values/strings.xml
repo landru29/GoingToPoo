@@ -29,4 +29,6 @@
     <string name="pref_hours_summary">Nombre d\'heures travaillées en un an</string>
     <string name="pref_hours_default">1600</string>
 
+    <string name="message_pref_salary">Renseignez votre salaire dans \"Préférences &gt; Données d\'entrée\" </string>
+
 </resources>
